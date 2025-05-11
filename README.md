@@ -5,3 +5,31 @@
 
 <img width="655" alt="image" src="https://github.com/user-attachments/assets/5785260d-4531-4803-b540-ea5875179674" />
 
+Find the 2nd highest salary 
+-------------------------
+Using DenseRank()
+----------------
+
+SELECT salary
+FROM (
+  SELECT salary,
+         DENSE_RANK() OVER (ORDER BY salary DESC) AS dr
+  FROM Employees
+) t
+WHERE dr = 2;
+
+Using Row_Number
+--------------
+WITH DistinctSalaries AS (
+  SELECT DISTINCT salary
+  FROM Employees
+)
+SELECT salary
+FROM (
+  SELECT salary,
+         ROW_NUMBER() OVER (ORDER BY salary DESC) AS rn
+  FROM DistinctSalaries
+) t
+WHERE rn = 2;
+
+
