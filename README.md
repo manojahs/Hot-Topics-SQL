@@ -18,5 +18,19 @@ FROM (
 ) t
 WHERE dr = 2;
 
+Delete the duplicate records 
+-----------------
+WITH Ranked AS (
+  SELECT
+    PK_ID,
+    ROW_NUMBER() OVER (
+      PARTITION BY ColA, ColB
+      ORDER BY PK_ID
+    ) AS rn
+  FROM MyTable
+)
+DELETE FROM Ranked
+WHERE rn > 1;
+
 
 
