@@ -18,18 +18,5 @@ FROM (
 ) t
 WHERE dr = 2;
 
-Using Row_Number
---------------
-WITH DistinctSalaries AS (
-  SELECT DISTINCT salary
-  FROM Employees
-)
-SELECT salary
-FROM (
-  SELECT salary,
-         ROW_NUMBER() OVER (ORDER BY salary DESC) AS rn
-  FROM DistinctSalaries
-) t
-WHERE rn = 2;
 
 
