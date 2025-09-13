@@ -34,6 +34,28 @@ WITH Ranked AS (
 DELETE FROM Ranked
 WHERE rn > 1;
 
+OR
+2nd highest salary
+-----------------------
+
+select  salary from (
+select Distinct salary ,Dense_rank() over (order by salary desc) as T
+from EMployees
+) as Salarydate
+where T=2
+
+OR
+
+
+;with SalaryData as
+(
+select salary,DENSE_RANK() over (order by salary desc) as T
+from EMployees
+)
+
+select Distinct Salary from SalaryData where T = 2
+
+
 
 ```
 
