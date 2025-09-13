@@ -55,6 +55,16 @@ from EMployees
 
 select Distinct Salary from SalaryData where T = 2
 
+2nd highest salary using dept wise
+-----------------------------------
+
+
+select Salary,deptname from
+(
+select distinct salary,deptname, DENSE_RANK() over (partition by deptname order by salary desc) as T
+from EMployee
+) as data
+where T=2 
 
 
 ```
