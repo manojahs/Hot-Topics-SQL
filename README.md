@@ -140,7 +140,7 @@ Project Table
 | Payroll     | Anita          |
 | Recruitment | Neha           |
 
-ProjectAssignment Table
+📝 ProjectAssignment Table (links Employee ↔ Project)
 
 | EmpID | ProjectName |
 | ----- | ----------- |
@@ -148,6 +148,13 @@ ProjectAssignment Table
 | 1     | Payroll     |
 | 2     | Recruitment |
 | 3     | ERP System  |
+
+Final Normalized Structure
+
+Employee Table — stores employee info
+Department Table — stores department info
+Project Table — stores project info
+ProjectAssignment Table — links employees to projects (many-to-many)
 
 
 
