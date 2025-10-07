@@ -136,6 +136,15 @@ ProjectAssign Table
 Rule: Remove transitive dependency.
 Suppose we also store Project Manager, which depends on Project, not EmpID. So we split Project details too.
 
+After 2NF
+| EmpID | EmpName | ProjectName | ProjectManager |
+| ----- | ------- | ----------- | -------------- |
+| 1     | Manoj   | ERP System  | Raj            |
+| 1     | Manoj   | Payroll     | Anita          |
+| 2     | Priya   | Recruitment | Neha           |
+| 3     | Rahul   | ERP System  | Raj            |
+
+
 Project Table
 
 | ProjectName | ProjectManager |
@@ -160,11 +169,25 @@ Department Table — stores department info
 Project Table — stores project info
 ProjectAssignment Table — links employees to projects (many-to-many)
 
+Formula to Identify Transitive Dependency
+
+If A → B and B → C, then C is transitively dependent on A.
+To satisfy 3NF: Remove C to a separate table so it depends directly on its own key (B), not indirectly on A.
+
+Here employeeiD depend on project and project dependent on Projectmanager so indirelcty employeeid dependent on projectmanager so in that case EMpID is primary key and Project and Projectmanager are non primary key so we need to create seperate table for that
+
+ProjectManager depends only on ProjectName (the key of Project table), not on EmpID.
+No non-key attribute depends on another non-key attribute in the same table.
+All dependencies are direct from key → non-key.
+
+
 | Normal Form | What it Removes       | Example                                    |
 | ----------- | --------------------- | ------------------------------------------ |
 | 1NF         | Repeating groups      | Split Project1, Project2 columns into rows |
 | 2NF         | Partial dependency    | Move Dept info to separate table           |
 | 3NF         | Transitive dependency | Move Project Manager to Project table      |
+
+
 
 
 ```
