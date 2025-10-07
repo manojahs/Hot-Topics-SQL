@@ -66,6 +66,88 @@ from EMployee
 ) as data
 where T=2 
 
+Normalization
+-----------------
+Normalization is a database design technique that organizes tables and their relationships to:
+
+Reduce data redundancy (duplicate data)
+Improve data integrity
+Make the database more efficient and easier to maintain
+It involves breaking down a table into smaller tables and defining relationships between them.
+
+1NF
+---
+first step of normalization is to convert these repeating columns into multiple rows, making the table truly in 1NF.
+
+| EmpID | EmpName | DepartmentName | DepartmentLocation | Project1    | Project2 |
+| ----- | ------- | -------------- | ------------------ | ----------- | -------- |
+| 1     | Manoj   | IT             | Bangalore          | ERP System  | Payroll  |
+| 2     | Priya   | HR             | Mumbai             | Recruitment | NULL     |
+| 3     | Rahul   | IT             | Bangalore          | ERP System  | NULL     |
+
+In this example it has atomic columns but Project1 , Project2 are same type of information
+so we need to make it as single group column for example Project
+
+
+| EmpID | EmpName | DepartmentName | DepartmentLocation | Project     |
+| ----- | ------- | -------------- | ------------------ | ----------- |
+| 1     | Manoj   | IT             | Bangalore          | ERP System  |
+| 1     | Manoj   | IT             | Bangalore          | Payroll     |
+| 2     | Priya   | HR             | Mumbai             | Recruitment |
+| 3     | Rahul   | IT             | Bangalore          | ERP System  |
+
+2NF
+------
+Rule: Remove partial dependency.
+
+Department details depend only on DepartmentName, not on (EmpID + Project).
+So separate department details into their own table.
+
+Employee Table
+
+| EmpID | EmpName | DepartmentName |
+| ----- | ------- | -------------- |
+| 1     | Manoj   | IT             |
+| 2     | Priya   | HR             |
+| 3     | Rahul   | IT             |
+
+Department Table
+
+| DepartmentName | DepartmentLocation |
+| -------------- | ------------------ |
+| IT             | Bangalore          |
+| HR             | Mumbai             |
+
+ProjectAssign Table
+
+| EmpID | Project     |
+| ----- | ----------- |
+| 1     | ERP System  |
+| 1     | Payroll     |
+| 2     | Recruitment |
+| 3     | ERP System  |
+
+3NF
+-------------
+Rule: Remove transitive dependency.
+Suppose we also store Project Manager, which depends on Project, not EmpID. So we split Project details too.
+
+Project Table
+
+| ProjectName | ProjectManager |
+| ----------- | -------------- |
+| ERP System  | Raj            |
+| Payroll     | Anita          |
+| Recruitment | Neha           |
+
+ProjectAssignment Table
+
+| EmpID | ProjectName |
+| ----- | ----------- |
+| 1     | ERP System  |
+| 1     | Payroll     |
+| 2     | Recruitment |
+| 3     | ERP System  |
 
 
 
