@@ -79,6 +79,10 @@ It involves breaking down a table into smaller tables and defining relationships
 ---
 first step of normalization is to convert these repeating columns into multiple rows, making the table truly in 1NF.
 
+No repeating groups
+Each cell has atomic value
+Each column represents one attribute
+
 | EmpID | EmpName | DepartmentName | DepartmentLocation | Project1    | Project2 |
 | ----- | ------- | -------------- | ------------------ | ----------- | -------- |
 | 1     | Manoj   | IT             | Bangalore          | ERP System  | Payroll  |
@@ -156,6 +160,11 @@ Department Table — stores department info
 Project Table — stores project info
 ProjectAssignment Table — links employees to projects (many-to-many)
 
+| Normal Form | What it Removes       | Example                                    |
+| ----------- | --------------------- | ------------------------------------------ |
+| 1NF         | Repeating groups      | Split Project1, Project2 columns into rows |
+| 2NF         | Partial dependency    | Move Dept info to separate table           |
+| 3NF         | Transitive dependency | Move Project Manager to Project table      |
 
 
 ```
