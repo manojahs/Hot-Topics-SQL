@@ -187,6 +187,41 @@ All dependencies are direct from key → non-key.
 | 2NF         | Partial dependency    | Move Dept info to separate table           |
 | 3NF         | Transitive dependency | Move Project Manager to Project table      |
 
+| **Property**        | **Meaning**     | **Explanation**                                                                 | **Example (SQL)**                                                                          |
+| ------------------- | --------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **A - Atomicity**   | All or nothing  | A transaction is either fully completed or not at all. No partial transactions. | If you transfer money from Account A to B, both debit and credit must happen — or neither. |
+| **C - Consistency** | Valid state     | Database remains in a valid state before and after the transaction.             | If a balance can't go negative, a transaction violating this won't be allowed.             |
+| **I - Isolation**   | No interference | Concurrent transactions do not interfere with each other.                       | Two users transferring funds simultaneously won't corrupt the data.                        |
+| **D - Durability**  | Permanent       | Once committed, changes persist even if the system crashes.                     | After a `COMMIT`, the data remains stored permanently.                                     |
+
+Atomicity
+-----------
+BEGIN TRANSACTION;
+
+-- Atomicity: Both steps must succeed
+UPDATE accounts SET balance = balance - 500 WHERE account_id = 1;
+UPDATE accounts SET balance = balance + 500 WHERE account_id = 2;
+
+-- Commit ensures Durability
+COMMIT;
+
+Consistency
+---------
+
+CREATE TABLE accounts (
+    account_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    balance DECIMAL(10,2) CHECK (balance >= 0)
+);
+
+BEGIN TRANSACTION;
+
+UPDATE accounts
+SET balance = balance - 1000
+WHERE account_id = 1;
+
+COMMIT;
+
 
 
 
