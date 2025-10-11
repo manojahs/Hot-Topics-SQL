@@ -222,6 +222,28 @@ WHERE account_id = 1;
 
 COMMIT;
 
+How to improve the Performance of Stored Proc
+------------------------------------------------
+
+
+
+Quick Checklist for SP Optimization
+
+✅ Set NOCOUNT ON
+
+✅ Only select needed columns
+
+✅ Index WHERE, JOIN, ORDER BY columns
+
+✅ Filter early
+
+✅ Avoid cursors, prefer set-based operations
+
+✅ Batch large DML operations
+
+✅ Avoid functions on indexed columns
+
+✅ Consider parameter sniffing
 
 
 
